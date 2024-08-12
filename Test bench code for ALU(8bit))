@@ -1,0 +1,45 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 12.08.2024 22:15:34
+// Design Name: 
+// Module Name: TB_8BIT_alu
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module TB_8BIT_alu;
+reg[7:0] a,b;
+reg[3:0] alu_sel;
+//outputs 
+wire[7:0] alu_out;
+wire c_out;
+//verilog code for alu_tb 
+integer i;
+alu_test_unit( a,b,alu_se,alu_out,c_out);
+initial begin
+//hold state for 100ns 
+a=8'h0A;
+b=4'h02;
+alu_sel=4'h0;
+for(i=0;i<=15;i=i+1)
+begin
+alu_sel=alu_sel+8'h01;
+#10;
+end;
+a=8'hf6;
+b=8'h0A;
+end
+endmodule
