@@ -1,0 +1,159 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Fri Sep 19 13:16:08 2025
+| Host         : DESKTOP-0VB10TH running 64-bit major release  (build 9200)
+| Command      : report_drc -name drc_1 -file C:/Users/ece/Desktop/VLSI_PROJECTS/8_bit_alu/DRC_ALU.txt -ruledecks default
+| Design       : alu_8bit
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: rtl-elabalu_8bit
+          Floorplan: rtl_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 1
++--------+----------+--------------------+------------+
+| Rule   | Severity | Description        | Violations |
++--------+----------+--------------------+------------+
+| ZPS7-1 | Warning  | PS7 block required | 1          |
++--------+----------+--------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+ZPS7-1#1 Warning
+PS7 block required  
+The PS7 cell must be used in this Zynq design in order to enable correct default configuration.
+Related violations: <none>
+
+
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: College Of Engineering And Management
+// Student: Snehasish Biswas 
+// Guide: Dr. Hirak Kr Maity
+// Create Date: 11.08.2025
+// Design Name: Testbench for 8-bit ALU
+// Target Device: Xilinx ZYNQ 7000+ Series
+//////////////////////////////////////////////////////////////////////////////////
+module TB_alu;
+
+    reg [7:0] A, B; 
+    reg [3:0] alu_sel;
+    wire [7:0] alu_out;
+    wire c_out;
+
+    // Instantiate ALU
+    alu_8bit uut (
+        .A(A),
+        .B(B),
+        .alu_sel(alu_sel),
+        .alu_out(alu_out),
+        .c_out(c_out)
+    );
+
+    initial begin
+        // Apply fixed inputs
+        A = 8'd10;  // decimal 10 = 0x0A
+        B = 8'd5;   // decimal 5 = 0x05
+
+        // Run through all ALU operations
+        $display("Time | alu_sel | Operation | Result | Carry");
+        for (alu_sel = 0; alu_sel < 16; alu_sel = alu_sel + 1) begin
+            #10;  // wait 10ns for each operation
+            $display("%0dns | %b | %s | %d | %b",
+                     $time, alu_sel, decode_op(alu_sel), alu_out, c_out);
+        end
+
+        #20;
+        $finish;
+    end
+
+    // Optional helper task to decode alu_sel
+    function [128*8:0] decode_op;
+        input [3:0] sel;
+        begin
+            case(sel)
+                4'b0000: decode_op = "ADD";
+                4'b0001: decode_op = "SUB";
+                4'b0010: decode_op = "MUL";
+                4'b0011: decode_op = "DIV";
+                4'b0100: decode_op = "LSHIFT";
+                4'b0101: decode_op = "RSHIFT";
+                4'b0110: decode_op = "ROTATE_LEFT";
+                4'b0111: decode_op = "ROTATE_RIGHT";
+                4'b1000: decode_op = "AND";
+                4'b1001: decode_op = "OR";
+                4'b1010: decode_op = "XOR";
+                4'b1011: decode_op = "NOR";
+                4'b1100: decode_op = "NAND";
+                4'b1101: decode_op = "XNOR";
+                4'b1110: decode_op = "GREATER";
+                4'b1111: decode_op = "EQUAL";
+                default: decode_op = "UNKNOWN";
+            endcase
+        end
+    endfunction
+
+endmodule
+
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="TB_alu_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="TB_alu" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="2,999,999 ps"></ZoomStartTime>
+      <ZoomEndTime time="3,000,006 ps"></ZoomEndTime>
+      <Cursor1Time time="3,000,000 ps"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject fp_name="/TB_alu/A" type="array">
+      <obj_property name="ElementShortName">A[7:0]</obj_property>
+      <obj_property name="ObjectShortName">A[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/TB_alu/B" type="array">
+      <obj_property name="ElementShortName">B[7:0]</obj_property>
+      <obj_property name="ObjectShortName">B[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/TB_alu/alu_sel" type="array">
+      <obj_property name="ElementShortName">alu_sel[3:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_sel[3:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/TB_alu/alu_out" type="array">
+      <obj_property name="ElementShortName">alu_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_out[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/TB_alu/c_out" type="logic">
+      <obj_property name="ElementShortName">c_out</obj_property>
+      <obj_property name="ObjectShortName">c_out</obj_property>
+   </wvobject>
+</wave_config>
