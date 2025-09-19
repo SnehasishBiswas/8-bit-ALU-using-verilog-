@@ -2,6 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company:College Of Engineering And Management 
 // Student: Snehasish Biswas 
+//Guide: Dr.Hirak Kr Maity
 // Create Date: 11.08.2025 22:01:37
 // Design Name: RTL_8-bit Arithmatic And Logic Unit 
 // Module Name: alu_8bit
