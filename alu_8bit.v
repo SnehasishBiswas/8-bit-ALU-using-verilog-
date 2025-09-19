@@ -1,25 +1,13 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 05.08.2024 22:01:37
-// Design Name: 
+// Company:College Of Engineering And Management 
+// Student: Snehasish Biswas 
+// Create Date: 11.08.2025 22:01:37
+// Design Name: RTL_8-bit Arithmatic And Logic Unit 
 // Module Name: alu_8bit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Project Name: 8-bit ALU
+// Target Devices: Xilinx ZYNQ 7000+ Series 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module alu_8bit(
     input [7:0] A,
     input [7:0] B,
